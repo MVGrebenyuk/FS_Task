@@ -1,0 +1,22 @@
+server:
+  port: ${FSTT_PORT:8080}
+  servlet:
+    application-display-name: "FinServicesTestTask"
+
+spring:
+  datasource:
+    url: ${FSTT_POSTGRES_URL}
+    username: ${FSTT_POSTGRES_USER}
+    password: ${FSTT_POSTGRES_PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    enabled: false
+
+app:
+  header: x-Source
+  systems: mail, mobile, bank, gosuslugi
+  file: validationRules.json
