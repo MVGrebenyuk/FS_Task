@@ -89,6 +89,10 @@ public class UserSpecification  {
         if(email != null){
             specification.and(userSpecification.emailLike(email));
         }
+
+        if(surname == null && lastName == null && name == null && phone == null && email == null){
+            throw new RuntimeException("Поиск в отсутствие критериев невозможен");
+        }
         return specification;
     }
 
