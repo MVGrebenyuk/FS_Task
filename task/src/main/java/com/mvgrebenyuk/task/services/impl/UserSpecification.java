@@ -67,7 +67,7 @@ public class UserSpecification  {
         };
     }
 
-    public Specification<User> getUserSpecification(String surname, String lastName, String name, String phone, String email) {
+    public Specification<User> getUserSpecification(String name, String surname, String lastName, String phone, String email) {
         UserSpecification userSpecification = new UserSpecification();
         Specification<User> specification = Specification.where(null);
         if(surname != null){

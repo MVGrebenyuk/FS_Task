@@ -12,6 +12,10 @@ import lombok.SneakyThrows;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -31,10 +35,11 @@ public class UserService {
            return objectMapper.convertValue(repository.save(objectMapper.convertValue(request, User.class)), UserDto.class);
     }
 
-    public ResponseDto findUserByAnyParams(String name, String surname, String lastName,
-                                           String phone, String email){
-        return objectMapper.convertValue(repository.findOne(specification.getUserSpecification(name, surname, lastName, phone, email)),
-                ResponseDto.class);
+    public List<ResponseDto> findUsersByAnyParams(String name, String surname, String lastName,
+                                            String phone, String email){
+        return repository.findAll(specification.getUserSpecification(name, surname, lastName, phone, email))
+                .stream().map(u -> objectMapper.convertValue(u, ResponseDto.class))
+                .collect(Collectors.toList());
     }
 
     public UserDto getUserById(Long id){

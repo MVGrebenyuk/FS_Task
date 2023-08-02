@@ -7,6 +7,8 @@ import com.mvgrebenyuk.task.services.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -25,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping(produces = "application/json")
-    public ResponseDto getUserByFields(@RequestParam(required = false) String surname, @RequestParam(required = false) String lastName, @RequestParam(required = false) String name,
-                                       @RequestParam(required = false) String phone, @RequestParam(required = false) String email){
-        return service.findUserByAnyParams(surname, lastName, name, phone, email);
+    public List<ResponseDto> getUserByFields(@RequestParam(required = false) String surname, @RequestParam(required = false) String lastName, @RequestParam(required = false) String name,
+                                            @RequestParam(required = false) String phone, @RequestParam(required = false) String email){
+        return service.findUsersByAnyParams(surname, lastName, name, phone, email);
     }
 
 }
